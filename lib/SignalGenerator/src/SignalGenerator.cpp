@@ -15,7 +15,7 @@ void SignalGenerator::DigitalSignalWriter()
 
     for(int i = 0; i<Settings::signalPulseProbes; i++)
     {
-        counter += Settings::sginalPulseDuration;
+        counter += Settings::signalPulseDuration;
 
         digitalWrite(Settings::digitalOutputPin, HIGH);
         delay(counter);
@@ -30,7 +30,7 @@ void SignalGenerator::DigitalShiftWriter()
     for(int i = 0; i<Settings::signalPulseProbes; i++)
     {
         analogWrite(Settings::analogOutputPin, 1023);
-        delay(Settings::sginalPulseDuration);
+        delay(Settings::signalPulseDuration);
         digitalWrite(Settings::digitalOutputPin, Settings::signalShift);
         delay(Settings::signalPulseDelay);
     }
@@ -55,7 +55,7 @@ void SignalGenerator::AnalogStandartWriter()
 
         analogWrite(Settings::analogOutputPin, val);
 
-        delay(Settings::signalPulseDelay+Settings::sginalPulseDuration);
+        delay(Settings::signalPulseDelay+Settings::signalPulseDuration);
     }
 }
 
@@ -67,7 +67,7 @@ void SignalGenerator::AnalogShiftWriter()
         
         analogWrite(Settings::analogOutputPin, val);
 
-        delay(Settings::signalPulseDelay+Settings::sginalPulseDuration);
+        delay(Settings::signalPulseDelay+Settings::signalPulseDuration);
     }
 }
 

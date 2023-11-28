@@ -4,7 +4,7 @@
 class Settings
 {
     public:
-    static const int sginalPulseDuration = 100;
+    static const int signalPulseDuration = 100;
     static const int signalPulseDelay = 10;
     static const int signalPulseProbes = 100;
     static const int signalShift = 512;
