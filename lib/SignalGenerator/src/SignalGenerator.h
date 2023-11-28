@@ -5,7 +5,8 @@ class SignalGenerator
 {
 private:
     static void DigitalSignalWriter();
-    static void AnalogShiftWriter(int shift);
+    static void DigitalShiftWriter();
+    static void AnalogShiftWriter();
     static void AnalogStandartWriter();
 
     /* \fn Mapping
@@ -24,8 +25,20 @@ private:
     */ 
     static void DigitalMux(bool first, bool second);
 public:
-
-    static void DigitalTest(Sensor sensor, bool isHigh, bool isDig);
+    /* \fn DigitalTest
+    *   \brief Run the test of digital signals
+    *
+    * @param sensor set needed sensor
+    * @param isHigh determine is it high voltage signal or low
+    */ 
+    static void DigitalTest(Sensor sensor, bool isHigh);
+        /* \fn DigitalTest
+    *   \brief Run the test of analog signals
+    *
+    * @param sensor set needed sensor
+    * @param isHigh determine is it high voltage signal or low
+    */ 
+    static void AnalogTest(Sensor sensor, bool isHigh);
 
 
 };

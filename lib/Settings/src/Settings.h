@@ -7,6 +7,7 @@ class Settings
     static const int sginalPulseDuration = 100;
     static const int signalPulseDelay = 10;
     static const int signalPulseProbes = 100;
+    static const int signalShift = 512;
 
     static const uint8_t digitalInputPin = D11;
     static const uint8_t analogInputPin = A5;
@@ -25,10 +26,10 @@ class Settings
 
 enum Sensor
 {
-    one = 0,
-    two = 1,
-    three = 2,
-    four = 3
+    one = 0b0,
+    two = 0b00000001,
+    three = 0b00000010,
+    four = 0b00000011
 };
 
 #endif

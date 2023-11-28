@@ -1,5 +1,13 @@
 #include "SignalGenerator.h"
 
+#pragma region DigitalWrite
+void SignalGenerator::DigitalTest(Sensor sensor, bool isHigh)
+{
+    MapSignal(sensor, isHigh, true);
+    DigitalSignalWriter();
+    MapSignal(sensor, isHigh, false);
+    DigitalShiftWriter();
+}
 
 void SignalGenerator::DigitalSignalWriter()
 {
@@ -16,6 +24,55 @@ void SignalGenerator::DigitalSignalWriter()
     }
 
 }
+
+void SignalGenerator::DigitalShiftWriter()
+{
+    for(int i = 0; i<Settings::signalPulseProbes; i++)
+    {
+        analogWrite(Settings::analogOutputPin, 1023);
+        delay(Settings::sginalPulseDuration);
+        digitalWrite(Settings::digitalOutputPin, Settings::signalShift);
+        delay(Settings::signalPulseDelay);
+    }
+}
+#pragma endregion
+
+#pragma region AnalogWrite
+
+void SignalGenerator::AnalogTest(Sensor sensor, bool isHigh)
+{
+    MapSignal(sensor, isHigh, false);
+    AnalogStandartWriter();
+    MapSignal(sensor, isHigh, false);
+    AnalogShiftWriter();
+}
+
+void SignalGenerator::AnalogStandartWriter()
+{
+    for(int i = 0; i < Settings::signalPulseProbes; i++)
+    {
+        auto val = 1023.0*(sin(i)+1)/2.0;
+
+        analogWrite(Settings::analogOutputPin, val);
+
+        delay(Settings::signalPulseDelay+Settings::sginalPulseDuration);
+    }
+}
+
+void SignalGenerator::AnalogShiftWriter()
+{
+    for(int i = 0; i < Settings::signalPulseProbes; i++)
+    {
+        auto val = (1023-Settings::signalShift)*sin(i) + Settings::signalShift;
+        
+        analogWrite(Settings::analogOutputPin, val);
+
+        delay(Settings::signalPulseDelay+Settings::sginalPulseDuration);
+    }
+}
+
+
+#pragma endregion
 
 void SignalGenerator::MapSignal(Sensor sensor, bool isHigh = false, bool isDig = true)
 {
@@ -39,21 +96,10 @@ void SignalGenerator::MapSignal(Sensor sensor, bool isHigh = false, bool isDig =
     }
 }
 
-void SignalGenerator::AnalogShiftWriter(int shift)
-{
-    for(int i = 0; i < 1024-shift; i++)
-    {
-
-    }
-}
-
 void SignalGenerator::DigitalMux(bool first, bool second)
 {
     digitalWrite(Settings::ouputMux1, first);
     digitalWrite(Settings::ouputMux2, second);
 }
-void SignalGenerator::DigitalTest(Sensor sensor, bool isHigh, bool isDig)
-{
-    MapSignal(sensor, isHigh, isDig);
-    DigitalSignalWriter();
-}
+
+
