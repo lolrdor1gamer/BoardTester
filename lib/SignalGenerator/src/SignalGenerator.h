@@ -6,6 +6,11 @@ class SignalGenerator
 private:
     /* data */
 public:
+
+    int pulseDuration = 100;
+
+
+
     SignalGenerator(/* args */);
     ~SignalGenerator();
 
